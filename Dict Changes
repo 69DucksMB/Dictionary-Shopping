@@ -1,0 +1,99 @@
+# ====================== #
+# Shopping with Dictionaries
+# Mark B
+# 5/26/2021
+# Be able to create a shopping list with user input and prices.
+# ====================== #
+
+import time
+
+# ========== ^imports^ =========== #
+
+slist = {}
+
+# ========== ^Dicts Heh^ ========= #
+
+start = True
+
+# ========== ^ints^ ============== #
+
+def show():
+    print("\nYour list: ")
+    if len(slist) == 0: # says none if you havent added an item
+        print('None')
+        time.sleep(.5)
+        
+    for k in slist:
+        print(k, '$', slist[k]) # prints item with price beside
+        time.sleep(.5)
+
+def main(): 
+    while start == True:
+        print('\n(1) Add items \n(2) Remove Items \n(3) Modify items \n(4) Calculate cost \n(5) Show List \n(9) Leave')
+        print('Please enter a number (1, 2, 3, 4, 5, or 9)')
+        do = input("What do you want to do? ")
+        
+        if '1' in do:
+            item = input('What item would you like to add? ')
+            itemc = float(input("What is it's price? "))
+            slist[item] = itemc #adds item and cost
+            print('Item added')
+            
+        elif '2' in do:
+            show()
+            if len(slist) == 0:
+                print('You have nothing in your list.')
+            else:
+                ritem = input('What item would you like to remove? ')
+                if ritem in slist:
+                    slist.pop(ritem)
+                    print(ritem, 'has been removed.')
+                    
+                else:
+                    print("I can't find that on the list.")
+                    time.sleep(1)        
+            
+        elif '3' in do:
+            show()
+            if len(slist) == 0: # Checks if you have stuff on your list
+                print('You have nothing in your list.')
+            else:
+                mitem = input('What item would you like to change? ')
+                if mitem in slist:
+                    slist.pop(mitem)
+                    citem = input("What would you like to change it to? ") #changed item
+                    citemc = input("What is it's cost? ") # changed item cost
+                    slist[citem] = citemc
+                    print('Your item has been modified')
+                    time.sleep(.5)
+                    
+                else:
+                    print("I can't find that on the list.")
+                    time.sleep(1)
+            
+        elif '4' in do:
+            if len(slist) == 0:
+                print('You have nothing in your list. ')
+                
+            else:
+                show()
+                costs = slist.values() #Return values of a dictionary.
+                total = sum(costs) #Compute sum of the values.
+                print("Your total cost: $", total)
+            
+        elif '5' in do:
+            show()
+            
+        elif '9' in do:
+            print('Goodbye')
+            break
+            
+        else:
+            print("I don't understand")
+
+# ========== ^funcs^ ========= #
+
+main()
+
+# ========== ^main^ ========== # 
+
